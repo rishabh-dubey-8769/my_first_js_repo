@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>htnml Events </title>
+</head>
+<body style="background-color: #414141; color: aliceblue;">
+    <h2>Amazing image</h2>
+    <div >
+        <ul id="images">
+            <li><img width="200px" id="photoshop" src="https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="photoshop"></li>
+            <li><img width="200px" id="japan" src="https://images.pexels.com/photos/3532553/pexels-photo-3532553.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><img width="200px" id="river" src="https://images.pexels.com/photos/3532551/pexels-photo-3532551.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><img width="200px" id="owl" src="https://images.pexels.com/photos/3532552/pexels-photo-3532552.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="" ></li>
+            <li><img width="200px" id="prayer" src="https://images.pexels.com/photos/2522671/pexels-photo-2522671.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><a style="color: aliceblue;" href="https://google.com" id="google">Google</a></li>
+        </ul>
+   </div>
+</body>
+<script>
+    // document.getElementById('owl').onclick = function(){
+    //     alert("owl clicked")
+    // }
+
+     // attachEvent()
+    // jQuery - on
+
+    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+    // type, timestamp, defaultPrevented
+    // target, toElement, srcElement, currentTarget,
+    // clientX, clientY, screenX, screenY
+    // altkey, ctrlkey, shiftkey, keyCode
+
+   //=======================================DOM EVENT OBJECT PROPERTIES & METHODS WITH EXAMPLES ====================================
+
+    /* --- 1. Basic Metadata --- */
+    // type: Returns the name of the event (e.g., "click", "mouseover").
+    // Example: document.addEventListener('click', (e) => console.log(e.type)); 
+
+    // timeStamp: The time (in milliseconds) when the event occurred since the page loaded.
+    // Example: let time = e.timeStamp;
+
+    // defaultPrevented: A boolean indicating if preventDefault() was called.
+    // Example: if (e.defaultPrevented) console.log("Default action canceled");
+
+
+    /* --- 2. Element References (Targets) --- */
+    // target: The actual element that triggered the event (the deepest child).
+    // Example: e.target.style.backgroundColor = 'yellow';
+
+    // currentTarget: The element the event listener is attached to.
+    // Example: console.log("Event handled by: " + e.currentTarget.id);
+
+    // srcElement: A non-standard legacy alias for 'target' (Old IE).
+    // Example: let targetEl = e.target || e.srcElement;
+
+    // toElement: The element the mouse moved TO (specific to mouseover/mouseout).
+    // Example: console.log("Mouse moved to: ", e.toElement);
+
+
+    /* --- 3. Coordinates & Positioning --- */
+    // clientX / clientY: Coordinates relative to the browser's viewport.
+    // Example: console.log(`Viewport: X=${e.clientX}, Y=${e.clientY}`);
+
+    // screenX / screenY: Coordinates relative to the physical monitor screen.
+    // Example: console.log(`Screen: X=${e.screenX}, Y=${e.screenY}`);
+
+
+    /* --- 4. Keyboard & Modifier Keys --- */
+    // altKey / ctrlKey / shiftKey: Boolean - True if the respective key was held down.
+    // Example: if (e.shiftKey) console.log("Shift + Click detected");
+
+    // keyCode: Numeric code of the keyboard key (Deprecated - use .key).
+    // Example: if (e.keyCode === 13) console.log("Enter key was pressed");
+
+
+    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+    // document.getElementById('images').addEventListener('click', function(e){
+    //     console.log("clicked inside the ul");
+    // }, false)    
+
+    // document.getElementById('owl').addEventListener('click', function(e){
+    //     console.log("owl clicked");
+    //     // e.stopPropagation()
+    // }, false)
+
+    // false -> means event bubbling(default/false) is executing by default i.e. click on the photo will operate the inner div class first then parent class if div child class present there.
+    // if false not written, it is assumed 'false' by default.
+    // if 'true' written, event capturing(true) is executed(opposite of false) i.e. first parent console will occur  , then child console.
+    
+    
+    // document.getElementById('google').addEventListener('click',function(e){
+    //     e.preventDefault();
+    //     e.stopPropagation()
+    //     console.log("google clicked");
+    // }, false)
+   
+    
+    // document.querySelector('#images').addEventListener('click', function(e){
+    //     console.log(e.target.tagName);
+    //     if (e.target.tagName === 'IMG') {
+    //         console.log(e.target.id);
+    //         let removeIt = e.target.parentNode
+    //         removeIt.remove()
+    //         //removeIt.parentNode.removeChild(removeIt)     //alternate method of removeIt.remove() but less preferred
+    //     }
+    // })
+</script>
+</html>

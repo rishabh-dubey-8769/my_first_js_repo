@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time-Intervals</title>
+    <style>
+        body{
+            text-align: center;
+        }
+        #stop{
+            background-color: rgb(68, 217, 234);
+            border-radius: 10px;
+            /* border: none; */
+        }
+        #stop:hover{background-color: pink;}
+    </style>
+</head>
+<body>
+    <h1>Sudhanshu Shekhar</h1>
+    <button id="stop">Stop</button>
+    <script>
+        //++++++++++++++++++++++++++++++++++++++++++
+        const task=function(){
+            console.log("Sudhanshu shekhar") 
+        }
+        setTimeout(task,3000)   // task performed when 3000 ms spent
+        //++++++++++++++++++++++++++++++++++++++++++
+        const change=function(){
+            document.querySelector('h1').innerHTML=`best boy sudhanshu `
+        }
+        const tryChange=setTimeout(change,5000)// set time out means it will do its funcn whether stored inside any variable or not, i.e. just simply called.
+        // stop the event of changing name through a button
+        document.querySelector('#stop').addEventListener('click',function(){
+            clearTimeout(tryChange)// to stop the name changing process
+            console.log("Hurrah name change stopped!")
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop-Watch-Online</title>
+    <style>
+        body{
+            text-align: center;
+            /* margin-top: 170px ; */
+            background-color: #212121;
+            color:#fff;
+            margin:0;
+        }
+        .top{
+            display:flex;
+            justify-content: center;
+            gap:30px;
+            border-radius: 10px;
+            height:37px;
+            background-color: rgb(232, 76, 235);
+            align-content: center;
+            margin: 0% ;
+        }
+        .top-btn{
+            cursor: pointer;
+            border-radius: 8px;
+            border: none;
+            height: 34px;;
+            width:auto;
+        }
+        .top-btn:hover{
+            background-color: yellow;
+        }
+        #stop,#start{
+            background-color: rgb(68, 217, 234);
+            border-radius: 18px;
+            margin: 4% auto;
+            cursor: pointer;
+            height: 42px;
+            width: 90px;    
+            font-weight:bolder;  
+            font-size: larger;      
+        }
+        #stop:hover,#start:hover{background-color: pink;}
+        #tag{
+            background-color: rgb(44, 86, 199);
+            height: 70px;
+            width: 190px;
+            border-radius: 20px;
+            text-align: center;
+            font-weight:bolder;
+            font-size: x-large;
+            margin:6%;
+        }
+        .container{
+            background-color: orange;
+            border-radius: 25px;
+            height: 140px;
+            width: 160px;   
+            font-weight: bold;      
+            font-size: x-large;  
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 4% auto; 
+            color:black
+        }
+        .circle{
+            height:250px;
+            width: 280px;
+            border-radius: 52px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: yellow;
+            margin: 0% auto; 
+        }
+        .footer{padding:2px;text-align:center;color:#fff;height:36px;background:#111;margin-top:100%;border-radius: 8px;}
+    </style>
+</head>
+<body>
+    <nav class="top">
+        <a href="https://github.com/salonbooking123"rel="noopener" target="_blank" ><button  class="top-btn"><img src="folder-logo.jpg" alt="no pics uploaded" width="25px"height=16px></button></a>
+        <a href="https://www.google.com" rel="noopener" target="_blank"><button  class="top-btn"><img src="google-logo.png" alt="no pics uploaded" width="25px"height=16px></button></a>
+        <a href="https://www.youtube.com" rel="noopener" target="_blank"><button  class="top-btn"><img src="yt-logo.png" alt="no pics uploaded" width="24px"height=16px></button></a>
+    </nav>
+    <h1><button id="tag">Stop Watch</button></h1>
+    <div class="circle">
+        <div id="perform">
+            <button id="start">Start</button>
+            <button id="stop">Stop</button>
+        </div>
+        <span class="container"></span>
+    </div>
+    <h2><u>[Pause History]</u></h2>
+    <div id="history"></div>
+</body>
+<script>
+    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    let k=1;
+    let intervalId=false;
+    let begin=0;
+    let countings=document.querySelector('.container')
+    countings.innerHTML=`0 min:00 sec`
+    let past=document.querySelector('#history')
+    let round=1;
+    past.innerHTML+=`Round ${round} <br>`
+    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    document.querySelector('#perform').addEventListener('click',function(e){
+        if(e.target.id==='start'){
+            begin=1;
+            //++++++++++++++++++++++++++++++++++
+            if(e.target.innerHTML=='Start'||e.target.innerHTML=='Continue'){
+                intervalId=false;
+                const task=function(){
+                    // countings.innerHTML+=`${k} - `
+                    let minute=Math.floor(k/60);
+                    let second=k%60
+                    if(second==0){countings.innerHTML=`${minute} min:00 sec`}
+                    else if(second<10){countings.innerHTML=`${minute} min:0${second} sec`}
+                    else{countings.innerHTML=`${minute} min:${second} sec`}
+                    k++;
+                }
+                if(!intervalId){
+                    intervalId=setInterval(task,1000,)
+                    e.target.innerHTML='Pause'
+                }
+            }
+            //+++++++++++++++++++++++++++++++++
+            else if(e.target.innerHTML=='Pause'){
+                let minute=Math.floor(k/60);
+                let second=k%60
+                if(second==0){past.innerHTML+=`[ ${minute} min:00 sec ] - `}
+                else if(second<10){past.innerHTML+=`[ ${minute} min:0${second-1} sec ] - `}
+                else{past.innerHTML+=`[ ${minute} min:${second-1} sec ] - `}
+
+                clearInterval(intervalId)
+                intervalId=false
+                e.target.innerHTML='Continue'
+            }
+        }
+        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        else if(e.target.id==='stop'){
+            if(begin==1){
+                let minute=Math.floor(k/60);
+                let second=k%60
+                if(second==0){past.innerHTML+=`[ ${minute} min:00 sec ] - `}
+                else if(second<10){past.innerHTML+=`[ ${minute} min:0${second-1} sec ] - `}
+                else{past.innerHTML+=`[ ${minute} min:${second-1} sec ] - `}
+                round++;
+                // past.innerHTML+=`<br>`
+                past.innerHTML+=`<br><br> Round ${round} <br>`
+            }
+
+
+            clearInterval(intervalId)  //  program execution stopped
+            intervalId=false
+            start.innerHTML="Start"
+            countings.innerHTML=`0 min:00 sec`
+            begin=0
+            k=1
+        }
+    })
+    
+</script>
+    <footer class="footer"><p><marquee>&copy;2026 Guess the Number.All rights reserved.</marquee></p></footer>
+
+</html>
